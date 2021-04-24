@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <StudentForm />
+      <StudentForm formName='Student Form'/>
     </div>
   );
 }

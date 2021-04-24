@@ -5,64 +5,59 @@ const StudentForm = () => {
   const [student, setStudent] = useState({
     name: '',
     teacher: '',
-    grade: '',
+    grade: 0,
   });
 
   const updateInput = (e) => {
-    setStudent({
-      ...student,
+    setStudent((prevState) => ({
+      ...prevState,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addStudent({
-      name: student.name,
-      teacher: student.teacher,
-      grade: student.grade
-    });
+    addStudent(student);
   };
 
   return (
     <>
-      <div className="results-add">
+      <div className='results-add'>
         <form
-          id="addResultsForm"
-          className="ui-form"
-          autoComplete="off"
+          id='addResultsForm'
+          className='ui-form'
+          autoComplete='off'
           onSubmit={handleSubmit}
         >
           <h2>New Student</h2>
           <label>Name:</label>
           <input
             autoFocus
-            name="name"
-            type="text"
+            name='name'
+            type='text'
             required
-            placeholder="Name"
+            placeholder='Name'
             value={student.name}
             onChange={updateInput}
           />
           <label>Teacher:</label>
           <input
-            name="teacher"
-            type="text"
+            name='teacher'
+            type='text'
             required
-            placeholder="Teacher"
+            placeholder='Teacher'
             value={student.teacher}
             onChange={updateInput}
           />
           <label>Grade:</label>
           <input
-            name="grade"
-            type="text"
+            name='grade'
             required
-            placeholder="Grade"
+            placeholder='Grade'
             value={student.grade}
             onChange={updateInput}
           />
-          <input type="submit" />
+          <input type='submit' />
         </form>
       </div>
     </>

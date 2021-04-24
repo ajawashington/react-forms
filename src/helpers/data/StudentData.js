@@ -3,13 +3,21 @@ import firebaseConfig from '../apiKeys';
 
 const baseUrl = firebaseConfig.databaseURL;
 
+const getStudents = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/students.json`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
+});
+
 const addStudent = (obj) => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/students.json`, obj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
-      axios.patch(`${baseUrl}/student/${response.data.name}.json`, body)
-        .catch((error) => reject(error));
-    });
+      axios.patch(`${baseUrl}/students/${response.data.name}.json`, body)
+        .then(() => {
+          getStudents().then((studentsArray) => console.warn(studentsArray));
+        });
+    }).catch((error) => reject(error));
 });
 
 export default addStudent;
