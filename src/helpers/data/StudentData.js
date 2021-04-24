@@ -15,7 +15,7 @@ const addStudent = (obj) => new Promise((resolve, reject) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${baseUrl}/students/${response.data.name}.json`, body)
         .then(() => {
-          getStudents().then((studentsArray) => console.warn(studentsArray));
+          getStudents().then((studentsArray) => resolve(studentsArray));
         });
     }).catch((error) => reject(error));
 });

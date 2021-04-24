@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import addStudent from './helpers/data/StudentData';
 
-const StudentForm = () => {
+export default function StudentForm() {
+  const [formTitle, setFormTitle] = useState();
   const [student, setStudent] = useState({
     name: '',
     teacher: '',
@@ -23,13 +24,14 @@ const StudentForm = () => {
   return (
     <>
       <div className='results-add'>
+      <input onChange={(e) => setFormTitle(e.target.value)}></input>
         <form
           id='addResultsForm'
           className='ui-form'
           autoComplete='off'
           onSubmit={handleSubmit}
         >
-          <h2>New Student</h2>
+          <h2>{formTitle}</h2>
           <label>Name:</label>
           <input
             autoFocus
@@ -62,6 +64,4 @@ const StudentForm = () => {
       </div>
     </>
   );
-};
-
-export default StudentForm;
+}
